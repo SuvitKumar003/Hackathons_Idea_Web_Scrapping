@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Problem Statements</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hackathon Problem Statements</h1>
+
+        <form action="/" method="POST">
+            <input type="text" name="company" placeholder="Enter company name (e.g., Google)" required>
+            <input type="number" name="year" placeholder="Enter year (e.g., 2024)" required>
+            <button type="submit">Fetch Hackathons</button>
+        </form>
+
+        {% if hackathons %}
+            <h2>Hackathons for {{ company }} in {{ year }}</h2>
+            <ul>
+                {% for hackathon in hackathons %}
+                    <li>
+                        <h3>{{ hackathon.title }}</h3>
+                        <p>{{ hackathon.description }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% elif error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
